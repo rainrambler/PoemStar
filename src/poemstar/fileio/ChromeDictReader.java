@@ -21,7 +21,8 @@ public class ChromeDictReader {
      * @param pw All Words
      */
     public void init(PoemWords pw) {
-        openFile("data/cc_cedict.txt");
+        //openFile("data/cc_cedict.txt");
+        openFile("allwords.txt");
         
         pw.addWords(AllWords);
     }

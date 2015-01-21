@@ -31,6 +31,14 @@ public class Poems {
         return allPoems_;
     }
     
+    public Poem getAt(int pos) {
+        if ((pos < 0) || (pos >= allPoems_.size())) {
+            return null;
+        }
+        
+        return allPoems_.get(pos);
+    }
+    
     public Poem getRandom() {
         if (allPoems_.isEmpty()) {
             return null;

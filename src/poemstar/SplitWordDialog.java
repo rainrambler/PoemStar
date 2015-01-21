@@ -1,5 +1,6 @@
 package poemstar;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import poemstar.algorithm.Sentence;
 import poemstar.beans.Poem;
@@ -248,7 +249,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
             pw.parseSentence(s);
         }
 
-        pw.savetoFile("chinesesplitresult.txt");
+        pw.saveWordstoFile("chinesesplitresult.txt");
     }//GEN-LAST:event_jButtonAutoDivideActionPerformed
 
     private void syncDisplay() {
@@ -272,22 +273,31 @@ public class SplitWordDialog extends javax.swing.JDialog {
         PoemWords pw = new PoemWords();
         reader.init(pw);
 
+        SecureRandom random = new SecureRandom();
+        ArrayList<Integer> parsed = new ArrayList<>();
         int i = 0;
-        for (Poem p : val.getAll()) {
-            initSentences(p);
-
-            for (String s : allSentences_) {
-                pw.parseSentence(s);
-            }
+        while (i < 1000) {
+            int pos = random.nextInt(val.getCount());
             
-            i++;
-            if (i == 50000) {
-                // First specified items
-                break;
+            if (parsed.contains(pos)) {
+                i++;
+            }
+            else {
+                parsed.add(pos);
+                
+                Poem p = val.getAt(pos);
+                
+                initSentences(p);
+
+                for (String s : allSentences_) {
+                    pw.parseSentence(s);
+                }
+                
+                i++;
             }
         }
 
-        pw.savetoFile("chinesesplitresult.txt");
+        pw.saveWordstoFile("chinesesplitresult.txt");
     }
 
     void initSentences(Poem poem) {

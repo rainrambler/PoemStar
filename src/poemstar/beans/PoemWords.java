@@ -150,6 +150,27 @@ public class PoemWords {
     }
     
     /**
+     * Save matched words to file
+     * @param filename File name to save
+     */
+    public void saveWordstoFile(String filename) {
+        if (matchedWords.isEmpty()) {
+            return;
+        }
+
+        try {
+            ArrayList<String> lines = new ArrayList<>();
+            File f = new File(filename);
+            for (String key : matchedWords.keySet()) {
+                lines.add(key);
+            }
+            FileUtils.writeLines(f, lines);
+        } catch (IOException ex) {
+            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
      * Get all matched count
      * @return All matched count 
      */
