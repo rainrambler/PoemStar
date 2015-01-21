@@ -3,7 +3,7 @@ package poemstar.beans;
 import java.util.Collection;
 
 /**
- * Search results of poems
+ * Search results of poems. Implements getall, size and getat function
  * @author xinway
  */
 public interface ISearchResults {

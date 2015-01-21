@@ -44,9 +44,5 @@ public class Sentence {
      */
     public String getResult() {
         return result_;
-    }
-    
-    public String getCurrentWord() {
-        return curWord_;
-    }
+    }    
 }

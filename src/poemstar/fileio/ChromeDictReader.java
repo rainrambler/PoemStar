@@ -29,7 +29,6 @@ public class ChromeDictReader {
     void openFile(String filename) {
         File file = new File(filename);
         try {
-            //List lines = FileUtils.readLines(file, "UTF-8");
             List<String> lines = FileUtils.readLines(file);
             for (String line : lines) {
                 parseLine(line);
@@ -52,10 +51,6 @@ public class ChromeDictReader {
         
         return true;
     }
-    
-    public boolean findInAllWords(String s) {
-        return AllWords.contains(s);
-    }
-    
+        
     HashSet<String> AllWords = new HashSet<>();
 }

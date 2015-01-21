@@ -123,6 +123,7 @@ public class MainJDialog extends javax.swing.JDialog {
         });
 
         jTextAreaContent.setColumns(20);
+        jTextAreaContent.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
         jTextAreaContent.setRows(5);
         jScrollPane1.setViewportView(jTextAreaContent);
 

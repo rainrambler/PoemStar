@@ -71,7 +71,8 @@ public class PoemWords {
             boolean isMatched = false;
             while (findWord(partString)) {
                 isMatched = true;
-                addMatchedWord(partString);
+                addMatchedWord(partString); // save matched word
+                
                 parseResult += partString + "-";
 
                 curLength++;

@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Some useful string functions
  * @author xinway
  */
 public enum AppLogger {

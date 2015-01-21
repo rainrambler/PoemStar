@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- *
+ * Search results of poems.
  * @author xinway
  */
 public class SearchResults implements ISearchResults {

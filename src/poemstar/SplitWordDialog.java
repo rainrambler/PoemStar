@@ -9,7 +9,7 @@ import poemstar.fileio.ChromeDictReader;
 import poemstar.util.StringUtil;
 
 /**
- *
+ * Split words manually
  * @author xinway
  */
 public class SplitWordDialog extends javax.swing.JDialog {
@@ -248,7 +248,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
             pw.parseSentence(s);
         }
 
-        pw.savetoFile("G:\\chinesesplitresult.txt");
+        pw.savetoFile("chinesesplitresult.txt");
     }//GEN-LAST:event_jButtonAutoDivideActionPerformed
 
     private void syncDisplay() {
@@ -281,13 +281,13 @@ public class SplitWordDialog extends javax.swing.JDialog {
             }
             
             i++;
-            if (i == 30000) {
+            if (i == 50000) {
                 // First specified items
                 break;
             }
         }
 
-        pw.savetoFile("G:\\chinesesplitresult.txt");
+        pw.savetoFile("chinesesplitresult.txt");
     }
 
     void initSentences(Poem poem) {

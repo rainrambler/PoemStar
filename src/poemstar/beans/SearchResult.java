@@ -106,10 +106,10 @@ public class SearchResult {
     } 
 
     /**
-     * @param Title the Title to set
+     * @param title the Title to set
      */
-    public void setTitle(String t) {
-        this.Title_ = t;
+    public void setTitle(String title) {
+        this.Title_ = title;
     }
     
     public String getDesc() {
