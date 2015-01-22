@@ -117,11 +117,12 @@ public class PoemWords {
     
     private void logParsedSentence() {
         if (parseResult.length() <= 1) {
-            return;            
+            return;
         }
         
         int count = StringUtils.countMatches(parseResult, "-");
         if (count >= ((parseResult.length() + 1) / 2)) {
+            // Char '-' existed too much, means the sentense is not parsed correctly
             parseResult = parseResult.substring(0, parseResult.length() - 1); // Remove last - 
             AppLogger.INSTANCE.getLogger().log(Level.INFO, parseResult);
         }            

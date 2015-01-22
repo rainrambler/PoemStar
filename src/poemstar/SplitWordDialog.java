@@ -280,7 +280,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
             int pos = random.nextInt(val.getCount());
             
             if (parsed.contains(pos)) {
-                i++;
+                //i++;
             }
             else {
                 parsed.add(pos);
@@ -297,7 +297,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
             }
         }
 
-        pw.saveWordstoFile("chinesesplitresult.txt");
+        pw.saveWordstoFile("chinesewordsfinded.txt");
     }
 
     void initSentences(Poem poem) {
