@@ -297,7 +297,8 @@ public class SplitWordDialog extends javax.swing.JDialog {
             }
         }
 
-        pw.saveWordstoFile("chinesewordsfinded.txt");
+        //pw.saveWordstoFile("chinesewordsfinded.txt");
+        pw.saveSplitResults();
     }
 
     void initSentences(Poem poem) {

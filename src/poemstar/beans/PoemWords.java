@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import poemstar.fileio.SplitResultWriter;
 import poemstar.util.AppLogger;
 
 /**
@@ -119,13 +120,18 @@ public class PoemWords {
         if (parseResult.length() <= 1) {
             return;
         }
+        writer_.addSentence(parseResult);
         
         int count = StringUtils.countMatches(parseResult, "-");
         if (count >= ((parseResult.length() + 1) / 2)) {
             // Char '-' existed too much, means the sentense is not parsed correctly
             parseResult = parseResult.substring(0, parseResult.length() - 1); // Remove last - 
-            AppLogger.INSTANCE.getLogger().log(Level.INFO, parseResult);
-        }            
+            //AppLogger.INSTANCE.getLogger().log(Level.INFO, parseResult);
+            writer_.addUnmatchedSentence(parseResult);
+        }
+        else {
+            
+        }
     }
 
     /**
@@ -171,6 +177,10 @@ public class PoemWords {
         }
     }
     
+    public void saveSplitResults() {
+        writer_.writeLogFiles();
+    }
+    
     /**
      * Get all matched count
      * @return All matched count 
@@ -182,4 +192,6 @@ public class PoemWords {
     HashSet<String> allWords = new HashSet<>();
     HashMap<String, Integer> matchedWords = new HashMap<>();
     String parseResult = "";
+    
+    SplitResultWriter writer_ = new SplitResultWriter();
 }
