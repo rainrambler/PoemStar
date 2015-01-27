@@ -116,6 +116,10 @@ public class PoemWords {
         return parseResult;
     }
     
+    public void addPoemDelimeter() {
+        writer_.addSentence("----------");
+    }
+    
     private void logParsedSentence() {
         if (parseResult.length() <= 1) {
             return;

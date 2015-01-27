@@ -276,7 +276,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
         SecureRandom random = new SecureRandom();
         ArrayList<Integer> parsed = new ArrayList<>();
         int i = 0;
-        while (i < 1000) {
+        while (i < 2000) {
             int pos = random.nextInt(val.getCount());
             
             if (parsed.contains(pos)) {
@@ -293,6 +293,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
                     pw.parseSentence(s);
                 }
                 
+                pw.addPoemDelimeter();
                 i++;
             }
         }
