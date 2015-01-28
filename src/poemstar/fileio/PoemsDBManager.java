@@ -67,11 +67,16 @@ public enum PoemsDBManager {
         p.setContent(content);
         p.setoriginalId("NA");              
         
-        return modifyPoemContent(p);
+        if (!modifyPoemContent(p)) {
+            return false;
+        }
+        
+        save(); // commit
+        return true;
     }
     
     public void addPoem(Poem p) {
-        poemDB_.addPoem(p);
+        poemDB_.addPoem(p);        
     }
     
     public void addPoemContent(String dynasty, String authorName, String title, String content) {
@@ -91,6 +96,7 @@ public enum PoemsDBManager {
         p.setoriginalId("NA");              
         
         addPoem(p);
+        save();
     }
         
     PoemDB poemDB_ = new PoemDB();

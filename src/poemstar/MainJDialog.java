@@ -34,7 +34,6 @@ public class MainJDialog extends javax.swing.JDialog {
         buttonGroupDynasty = new javax.swing.ButtonGroup();
         jScrollPaneLog = new javax.swing.JScrollPane();
         jListResult = new javax.swing.JList();
-        jButtonLoad = new javax.swing.JButton();
         jLabelDynasty = new javax.swing.JLabel();
         jRadioButtonPrevTang = new javax.swing.JRadioButton();
         jRadioButtonTang = new javax.swing.JRadioButton();
@@ -73,13 +72,6 @@ public class MainJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPaneLog.setViewportView(jListResult);
-
-        jButtonLoad.setText("Load");
-        jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLoadActionPerformed(evt);
-            }
-        });
 
         jLabelDynasty.setText("朝代：");
 
@@ -152,9 +144,6 @@ public class MainJDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPaneLog, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButtonLoad)
-                        .addGap(0, 728, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabelKeyword)
@@ -186,7 +175,7 @@ public class MainJDialog extends javax.swing.JDialog {
                                         .addComponent(jComboBoxAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButtonClearAuthor)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                         .addComponent(jButtonModify)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSplitWord)))
@@ -223,9 +212,7 @@ public class MainJDialog extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonLoad)
-                .addContainerGap())
+                .addGap(43, 43, 43))
         );
 
         jLabelDynasty.getAccessibleContext().setAccessibleName("Dynasty");
@@ -235,10 +222,6 @@ public class MainJDialog extends javax.swing.JDialog {
 
     ISearchResults results_;
     
-    private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
-                
-    }//GEN-LAST:event_jButtonLoadActionPerformed
-
     private void jButtonQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQueryActionPerformed
         QueryCondition qc = createQueryCondition();
         
@@ -306,46 +289,9 @@ public class MainJDialog extends javax.swing.JDialog {
         return qc;
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            AppLogger.INSTANCE.getLogger().log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                MainJDialog dialog = new MainJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupDynasty;
     private javax.swing.JButton jButtonClearAuthor;
-    private javax.swing.JButton jButtonLoad;
     private javax.swing.JButton jButtonModify;
     private javax.swing.JButton jButtonQuery;
     private javax.swing.JButton jButtonSplitWord;
