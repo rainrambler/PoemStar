@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import poemstar.algorithm.WordMatcher;
 import poemstar.fileio.SplitResultWriter;
 import poemstar.util.AppLogger;
 
@@ -20,15 +21,15 @@ import poemstar.util.AppLogger;
 public class PoemWords {
 
     public void addWords(Collection<String> arr) {
-        allWords.addAll(arr);
+        matcher_.addWords(arr);
     }
 
     public void addWord(String wordStr) {
-        if (wordStr.isEmpty()) {
-            AppLogger.INSTANCE.getLogger().log(Level.WARNING, "PoenWords.addWord: parameter is empty!");
-            return;
-        }
-        allWords.add(wordStr);
+        matcher_.addWord(wordStr);
+    }
+    
+    public void finishAddWord() {
+        matcher_.finishAddWord();
     }
 
     private void addMatchedWord(String wordStr) {
@@ -45,11 +46,10 @@ public class PoemWords {
         else {
             matchedWords.put(wordStr, 1);
         }
-        //AppLogger.INSTANCE.getLogger().log(Level.INFO, "addMatchedWord: {0}", wordStr);
     }
 
     private boolean findWord(String s) {
-        return allWords.contains(s);
+        return matcher_.findWord(s);
     }
 
     /**
@@ -108,6 +108,31 @@ public class PoemWords {
             parseResult += s.substring(s.length() - 1) + "-"; // The last char
         }
 
+        logParsedSentence();        
+        return true;
+    }
+    
+    /**
+     * Parse a sentence of a poem
+     * @param s a sentence of a poem
+     * @return Parse success or failed
+     */
+    public boolean parseSentence2(String s) {
+        if ((s == null) || (s.isEmpty())) {
+            AppLogger.INSTANCE.getLogger().log(Level.WARNING, "PoenWords.parseSentence: parameter is empty!");
+            return false;
+        }
+        
+        parseResult = "";
+        
+        ArrayList<String> allChildren = matcher_.split(s);
+        for (String oneWord : allChildren) {
+            parseResult += oneWord + "-";
+        }
+        
+        if (parseResult.length() > 0) {
+            parseResult = parseResult.substring(0, parseResult.length() - 1); // Remove last - 
+        }
         logParsedSentence();        
         return true;
     }
@@ -193,9 +218,10 @@ public class PoemWords {
         return matchedWords.size();
     }
     
-    HashSet<String> allWords = new HashSet<>();
+    //HashSet<String> allWords = new HashSet<>();
     HashMap<String, Integer> matchedWords = new HashMap<>();
     String parseResult = "";
     
     SplitResultWriter writer_ = new SplitResultWriter();
+    WordMatcher matcher_ = new WordMatcher();
 }

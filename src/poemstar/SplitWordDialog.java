@@ -246,7 +246,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
         reader.init(pw);
 
         for (String s : allSentences_) {
-            pw.parseSentence(s);
+            pw.parseSentence2(s);
         }
 
         //pw.saveWordstoFile("chinesesplitresult.txt");
@@ -291,7 +291,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
                 initSentences(p);
 
                 for (String s : allSentences_) {
-                    pw.parseSentence(s);
+                    pw.parseSentence2(s);
                 }
                 
                 pw.addPoemDelimeter();

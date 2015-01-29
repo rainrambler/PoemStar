@@ -35,19 +35,6 @@ public class PoemWordsTest {
     }
 
     /**
-     * Test of addWords method, of class PoemWords.
-     */
-    @Test
-    public void testAddWords() {
-        System.out.println("addWords");
-        Collection<String> arr = null;
-        PoemWords instance = new PoemWords();
-        instance.addWords(arr);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of addWord method, of class PoemWords.
      */
     @Test
@@ -58,7 +45,7 @@ public class PoemWordsTest {
         instance.addWord("愁心");
 
         String s = "我寄愁心与明月";
-        boolean res = instance.parseSentence(s);
+        boolean res = instance.parseSentence2(s);
         assertTrue(res);
         assertEquals(2, instance.getMatchedCount());
     }
@@ -75,7 +62,7 @@ public class PoemWordsTest {
         instance.addWord("丰年");
 
         String s = "稻花香里说丰年";
-        boolean res = instance.parseSentence(s);
+        boolean res = instance.parseSentence2(s);
         assertTrue(res);
         assertEquals(3, instance.getMatchedCount());
     }
@@ -90,7 +77,7 @@ public class PoemWordsTest {
         instance.addWord("黄河");
 
         String s = "黄河入海流";
-        boolean res = instance.parseSentence(s);
+        boolean res = instance.parseSentence2(s);
         assertTrue(res);
         assertEquals(1, instance.getMatchedCount());
         assertEquals("黄河-入-海-流", instance.getParsedSentence());
@@ -105,7 +92,7 @@ public class PoemWordsTest {
         instance.addWord("不曾");
         
         String s = "青山明月不曾空";
-        boolean res = instance.parseSentence(s);
+        boolean res = instance.parseSentence2(s);
         assertTrue(res);
         assertEquals(3, instance.getMatchedCount());
         assertEquals("青山-明月-不曾-空", instance.getParsedSentence());
@@ -119,7 +106,7 @@ public class PoemWordsTest {
         instance.addWord("明月");
 
         String s = "身无彩凤双飞翼";
-        boolean res = instance.parseSentence(s);
+        boolean res = instance.parseSentence2(s);
         assertTrue(res);
         assertEquals(0, instance.getMatchedCount());
         assertEquals("身-无-彩-凤-双-飞-翼", instance.getParsedSentence());
@@ -127,14 +114,13 @@ public class PoemWordsTest {
     
     @Test
     public void testparseSentence6() {
-        System.out.println("testparseSentence5");
+        System.out.println("testparseSentence6");
         PoemWords instance = new PoemWords();
         instance.addWord("桃花");
         instance.addWord("依旧");
         instance.addWord("春风");
-
         String s = "桃花依旧笑春风";
-        boolean res = instance.parseSentence(s);
+        boolean res = instance.parseSentence2(s);
         assertTrue(res);
         assertEquals(3, instance.getMatchedCount());
         assertEquals("桃花-依旧-笑-春风", instance.getParsedSentence());
@@ -153,7 +139,7 @@ public class PoemWordsTest {
         String s = "";
         PoemWords instance = new PoemWords();
         boolean expResult = false;
-        boolean result = instance.parseSentence(s);
+        boolean result = instance.parseSentence2(s);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
