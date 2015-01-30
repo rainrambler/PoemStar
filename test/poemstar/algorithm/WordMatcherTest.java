@@ -28,7 +28,7 @@ public class WordMatcherTest {
         instance.addWord("丰年");
         instance.finishAddWord();
         
-        ArrayList<String> result = instance.split(verse);
+        ArrayList<String> result = instance.split2(verse);
         assertEquals("稻花香", result.get(0));
         assertEquals("里", result.get(1));
         assertEquals("说", result.get(2));

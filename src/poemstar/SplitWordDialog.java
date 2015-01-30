@@ -2,6 +2,7 @@ package poemstar;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import org.apache.commons.lang3.time.StopWatch;
 import poemstar.algorithm.Sentence;
 import poemstar.beans.Poem;
 import poemstar.beans.PoemWords;
@@ -270,14 +271,19 @@ public class SplitWordDialog extends javax.swing.JDialog {
     }
 
     public void parseAllPoems(Poems val) {
+        StopWatch sw = new StopWatch();
+        sw.start();
+        
         ChromeDictReader reader = new ChromeDictReader();
         PoemWords pw = new PoemWords();
         reader.init(pw);
+        sw.split();        
+        System.out.println(sw.toSplitString());
 
         SecureRandom random = new SecureRandom();
         ArrayList<Integer> parsed = new ArrayList<>();
         int i = 0;
-        while (i < 5000) {
+        while (i < 2000) {
             int pos = random.nextInt(val.getCount());
             
             if (parsed.contains(pos)) {
@@ -299,9 +305,15 @@ public class SplitWordDialog extends javax.swing.JDialog {
             }
         }
 
+        sw.split();
+        System.out.println(sw.toSplitString());
+        
         //pw.saveWordstoFile("chinesewordsfinded.txt");
         pw.savetoFile("splitcounterresult.txt");
         pw.saveSplitResults();
+        sw.stop();
+        
+        System.out.println(sw.toString());
     }
 
     void initSentences(Poem poem) {

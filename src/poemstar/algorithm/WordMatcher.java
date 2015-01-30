@@ -25,16 +25,17 @@ public class WordMatcher {
         allWords_.addAll(arr);
     }
 
+    // Deprecated because of performance problem
     public ArrayList<String> split(String verse) {
         ArrayList<String> arr = new ArrayList<>();
-        
+
         String partString = verse;
         while (partString.length() > 0) {
             boolean matched = false;
-            
+
             for (String oneWord : allWords_) {
                 String longerWord = findLongerWord(oneWord);
-                
+
                 if (partString.startsWith(longerWord)) {
                     arr.add(longerWord);
                     matched = true;
@@ -43,15 +44,53 @@ public class WordMatcher {
                     break;
                 }
             }
-            
+
             if (!matched) {
-//                for (int i = 0; i < longestWordLength_; i++) {
-//                    String singleChar = partString.substring(i, i+1);
-//                    arr.add(singleChar);
-//                }
                 arr.add(partString.substring(0, 1));
                 partString = partString.substring(1);
             }
+        }
+        return arr;
+    }
+
+    public ArrayList<String> split2(String verse) {
+        ArrayList<String> arr = new ArrayList<>();
+
+        String partString = verse;
+        while (partString.length() > 0) {
+            if (partString.length() == 1) {
+                // Can not matched
+                arr.add(partString.substring(0, 1));
+                partString = partString.substring(1);
+                continue;
+            }
+            String firstPart = partString.substring(0, 2);
+            
+            if (allWords_.contains(firstPart)) {
+                // Matched as a word
+                String longerWord = findLongerWord(firstPart);
+
+                if (!longerWord.equals(firstPart)) {
+                    String resultWord = firstPart;
+                    if (partString.startsWith(longerWord)) {
+                        resultWord = longerWord; // Can match the longer word                        
+                    } else {
+                        // Not match the longer word
+                    }
+
+                    arr.add(resultWord);
+                    partString = partString.substring(resultWord.length());
+                }
+                else {
+                    arr.add(firstPart);
+                    partString = partString.substring(firstPart.length());
+                }
+            }
+            else {
+                // Can not matched
+                arr.add(partString.substring(0, 1));
+                partString = partString.substring(1);
+            }            
         }
         return arr;
     }
@@ -71,20 +110,13 @@ public class WordMatcher {
                     word2Longer_.put(s, s2);
                 }
             }
-            
-            // Find longest word length
-            // for calculation
-//            if (s.length() > longestWordLength_) {
-//                longestWordLength_ = s.length();
-//            }
         }
     }
-    
+
     public boolean findWord(String s) {
         return allWords_.contains(s);
     }
 
     HashMap<String, String> word2Longer_ = new HashMap<>();
     HashSet<String> allWords_ = new HashSet<>();
-    //int longestWordLength_ = 0;
 }

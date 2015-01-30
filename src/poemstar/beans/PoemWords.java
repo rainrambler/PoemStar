@@ -22,6 +22,7 @@ public class PoemWords {
 
     public void addWords(Collection<String> arr) {
         matcher_.addWords(arr);
+        matcher_.finishAddWord();
     }
 
     public void addWord(String wordStr) {
@@ -125,7 +126,7 @@ public class PoemWords {
         
         parseResult = "";
         
-        ArrayList<String> allChildren = matcher_.split(s);
+        ArrayList<String> allChildren = matcher_.split2(s);
         for (String oneWord : allChildren) {
             parseResult += oneWord + "-";
             
@@ -158,7 +159,7 @@ public class PoemWords {
         int count = StringUtils.countMatches(parseResult, "-");
         if (count >= (parseResult.length() / 2)) {
             // Char '-' existed too much, means the sentense is not parsed correctly
-            parseResult = parseResult.substring(0, parseResult.length() - 1); // Remove last - 
+            //parseResult = parseResult.substring(0, parseResult.length() - 1); // Remove last - 
             writer_.addUnmatchedSentence(parseResult);
         }
         else {
