@@ -64,7 +64,7 @@ public class PoemWordsTest {
         String s = "稻花香里说丰年";
         boolean res = instance.parseSentence2(s);
         assertTrue(res);
-        assertEquals(3, instance.getMatchedCount());
+        assertEquals(2, instance.getMatchedCount());
     }
 
     /**

@@ -128,6 +128,10 @@ public class PoemWords {
         ArrayList<String> allChildren = matcher_.split(s);
         for (String oneWord : allChildren) {
             parseResult += oneWord + "-";
+            
+            if (oneWord.length() >  1) {
+                addMatchedWord(oneWord);
+            }
         }
         
         if (parseResult.length() > 0) {
@@ -152,10 +156,9 @@ public class PoemWords {
         writer_.addSentence(parseResult);
         
         int count = StringUtils.countMatches(parseResult, "-");
-        if (count >= ((parseResult.length() + 1) / 2)) {
+        if (count >= (parseResult.length() / 2)) {
             // Char '-' existed too much, means the sentense is not parsed correctly
             parseResult = parseResult.substring(0, parseResult.length() - 1); // Remove last - 
-            //AppLogger.INSTANCE.getLogger().log(Level.INFO, parseResult);
             writer_.addUnmatchedSentence(parseResult);
         }
         else {
