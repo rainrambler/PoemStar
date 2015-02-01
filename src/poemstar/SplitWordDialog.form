@@ -199,7 +199,6 @@
     <Component class="javax.swing.JButton" name="jButtonAutoDivide">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x81ea;&#x52a8;&#x5206;&#x8bcd;"/>
-        <Property name="actionCommand" type="java.lang.String" value="&#x81ea;&#x52a8;&#x5206;&#x8bcd;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAutoDivideActionPerformed"/>
