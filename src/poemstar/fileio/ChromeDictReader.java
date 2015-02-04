@@ -48,7 +48,10 @@ public class ChromeDictReader {
             return false;
         }
         
-        AllWords.add(line);
+        boolean res = AllWords.add(line);
+        if (!res) {
+            AppLogger.INSTANCE.getLogger().log(Level.INFO, "Repeat word: {0}", line);
+        }
         
         return true;
     }
