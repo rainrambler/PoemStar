@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/MainJDialog.java</file>
             <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/PoemWords.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/util/PlainFormatter.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/algorithm/Sentence.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/test/poemstar/beans/PoemWordsTest.java</file>
             <file>file:/G:/Test/Poem/PoemStar/src/poemstar/fileio/ChromeDictReader.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/fileio/PoemDB.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/util/StringUtil.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/fileio/PoemsDBManager.java</file>
             <file>file:/G:/Test/Poem/PoemStar/src/poemstar/SplitWordDialog.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/util/AppLogger.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/algorithm/WordMatcher.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/Poem.java</file>
         </group>
     </open-files>
 </project-private>

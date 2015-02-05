@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.pmw.tinylog.Logger;
 import poemstar.algorithm.WordMatcher;
 import poemstar.fileio.SplitResultWriter;
-import poemstar.util.AppLogger;
 
 /**
  * All words founded in Chinese poems
@@ -35,7 +33,7 @@ public class PoemWords {
 
     private void addMatchedWord(String wordStr) {
         if (wordStr.isEmpty()) {
-            AppLogger.INSTANCE.getLogger().log(Level.WARNING, "PoenWords.addMatchedWord: parameter is empty!");
+            Logger.warn("PoenWords.addMatchedWord: parameter is empty!");
             return;
         }
         
@@ -60,7 +58,7 @@ public class PoemWords {
      */
     public boolean parseSentence(String s) {
         if ((s == null) || (s.isEmpty())) {
-            AppLogger.INSTANCE.getLogger().log(Level.WARNING, "PoenWords.parseSentence: parameter is empty!");
+            Logger.warn("PoenWords.parseSentence: parameter is empty!");
             return false;
         }
         
@@ -120,7 +118,7 @@ public class PoemWords {
      */
     public boolean parseSentence2(String s) {
         if ((s == null) || (s.isEmpty())) {
-            AppLogger.INSTANCE.getLogger().log(Level.WARNING, "PoenWords.parseSentence: parameter is empty!");
+            Logger.warn("PoenWords.parseSentence: parameter is empty!");
             return false;
         }
         
@@ -185,7 +183,7 @@ public class PoemWords {
             }
             FileUtils.writeLines(f, lines);
         } catch (IOException ex) {
-            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+            Logger.error(ex);
         }
     }
     
@@ -206,7 +204,7 @@ public class PoemWords {
             }
             FileUtils.writeLines(f, lines);
         } catch (IOException ex) {
-            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+            Logger.error(ex);
         }
     }
     

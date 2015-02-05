@@ -5,10 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
+import org.pmw.tinylog.Logger;
 import poemstar.beans.PoemWords;
-import poemstar.util.AppLogger;
 
 /**
  * Read Chinese words file in Chromium code
@@ -35,7 +34,7 @@ public class ChromeDictReader {
                 parseLine(line);
             }
         } catch (IOException ex) {
-            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+            Logger.error(ex);
         }
     }
     
@@ -50,7 +49,7 @@ public class ChromeDictReader {
         
         boolean res = AllWords.add(line);
         if (!res) {
-            AppLogger.INSTANCE.getLogger().log(Level.INFO, "Repeat word: {0}", line);
+            Logger.info("Repeat word: {0}", line);
         }
         
         return true;

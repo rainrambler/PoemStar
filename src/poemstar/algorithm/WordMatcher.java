@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.logging.Level;
-import poemstar.util.AppLogger;
+import org.pmw.tinylog.Logger;
 
 /**
  *
@@ -15,7 +14,7 @@ public class WordMatcher {
 
     public void addWord(String wordStr) {
         if (wordStr.isEmpty()) {
-            AppLogger.INSTANCE.getLogger().log(Level.WARNING, "PoenWords.addWord: parameter is empty!");
+            Logger.info("PoenWords.addWord: parameter is empty!");
             return;
         }
         allWords_.add(wordStr);

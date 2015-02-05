@@ -5,9 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
-import poemstar.util.AppLogger;
+import org.pmw.tinylog.Logger;
 import poemstar.util.DateTimeUtils;
 
 /**
@@ -22,7 +21,7 @@ public class SplitResultWriter {
             FileUtils.writeLines(allfile, allSentences_);
             FileUtils.writeLines(unmatchedfile, unmatchedSentences_);
         } catch (IOException ex) {
-            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+            Logger.error(ex);
         }
     }
     

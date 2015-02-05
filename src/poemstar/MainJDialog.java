@@ -6,7 +6,6 @@ import poemstar.beans.Poems;
 import poemstar.beans.QueryCondition;
 import poemstar.beans.SearchResult;
 import poemstar.fileio.PoemsDBManager;
-import poemstar.util.AppLogger;
 
 /**
  * Main UI

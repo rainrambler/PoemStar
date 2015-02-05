@@ -5,8 +5,6 @@ import com.healthmarketscience.jackcess.Table;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import poemstar.beans.Poem;
 import poemstar.beans.Poems;
 
@@ -49,7 +47,7 @@ public class MdbReader {
             db_.save();
             System.out.println("Read from db complete! Poems: " + poems_.getCount());           
         } catch (IOException ex) {
-            Logger.getLogger(MdbReader.class.getName()).log(Level.SEVERE, null, ex);
+            org.pmw.tinylog.Logger.error(ex);
         }
     }
         

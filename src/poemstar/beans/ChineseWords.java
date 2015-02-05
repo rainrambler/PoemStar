@@ -5,9 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
-import poemstar.util.AppLogger;
+import org.pmw.tinylog.Logger;
 
 /**
  *
@@ -36,7 +35,7 @@ public enum ChineseWords {
             File file = new File(xmlFileName);
             FileUtils.writeLines(file, allWords_);
         } catch (IOException ex) {
-            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+            Logger.error(ex);
         }
     }
     
@@ -45,7 +44,7 @@ public enum ChineseWords {
             File file = new File(xmlFileName);
             allWords_.addAll(FileUtils.readLines(file));
         } catch (IOException ex) {
-            AppLogger.INSTANCE.getLogger().log(Level.SEVERE, null, ex);
+            Logger.error(ex);
         }
     }
         
