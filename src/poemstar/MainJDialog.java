@@ -1,11 +1,13 @@
 package poemstar;
 
 import javax.swing.DefaultListModel;
+import org.pmw.tinylog.Logger;
 import poemstar.beans.ISearchResults;
 import poemstar.beans.Poems;
 import poemstar.beans.QueryCondition;
 import poemstar.beans.SearchResult;
 import poemstar.fileio.PoemsDBManager;
+import poemstar.util.DateTimeUtils;
 
 /**
  * Main UI
@@ -238,8 +240,10 @@ public class MainJDialog extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //ChineseWords.INSTANCE.loadFromFile("D:\\chinesewords.txt");
+        Logger.info("{}: PoemStart started.", DateTimeUtils.getTimeDesc());
         PoemsDBManager.INSTANCE.init();
         jLabelStatus.setText("Read from DB complete!");
+        Logger.info("{}: Read from DB complete!", DateTimeUtils.getTimeDesc());
     }//GEN-LAST:event_formWindowOpened
 
     private void jListResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListResultMouseClicked

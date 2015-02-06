@@ -24,34 +24,6 @@ public class WordMatcher {
         allWords_.addAll(arr);
     }
 
-    // Deprecated because of performance problem
-    public ArrayList<String> split(String verse) {
-        ArrayList<String> arr = new ArrayList<>();
-
-        String partString = verse;
-        while (partString.length() > 0) {
-            boolean matched = false;
-
-            for (String oneWord : allWords_) {
-                String longerWord = findLongerWord(oneWord);
-
-                if (partString.startsWith(longerWord)) {
-                    arr.add(longerWord);
-                    matched = true;
-
-                    partString = partString.substring(longerWord.length());
-                    break;
-                }
-            }
-
-            if (!matched) {
-                arr.add(partString.substring(0, 1));
-                partString = partString.substring(1);
-            }
-        }
-        return arr;
-    }
-
     public ArrayList<String> split2(String verse) {
         ArrayList<String> arr = new ArrayList<>();
 
