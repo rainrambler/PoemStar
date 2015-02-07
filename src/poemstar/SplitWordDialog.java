@@ -3,6 +3,8 @@ package poemstar;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import org.apache.commons.lang3.time.StopWatch;
+import org.pmw.tinylog.Logger;
+import poemstar.algorithm.RepeatCalculator;
 import poemstar.algorithm.Sentence;
 import poemstar.beans.Poem;
 import poemstar.beans.PoemWords;
@@ -278,12 +280,14 @@ public class SplitWordDialog extends javax.swing.JDialog {
         PoemWords pw = new PoemWords();
         reader.init(pw);
         sw.split();        
-        System.out.println(sw.toSplitString());
+        Logger.info(sw.toSplitString());
+        
+        RepeatCalculator rc = new RepeatCalculator();
 
         SecureRandom random = new SecureRandom();
         ArrayList<Integer> parsed = new ArrayList<>();
         int i = 0;
-        while (i < 2000) {
+        while (i < 5000) {
             int pos = random.nextInt(val.getCount());
             
             if (parsed.contains(pos)) {
@@ -298,6 +302,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
 
                 for (String s : allSentences_) {
                     pw.parseSentence2(s);
+                    rc.addSentence(s);
                 }
                 
                 pw.addPoemDelimeter();
@@ -306,14 +311,15 @@ public class SplitWordDialog extends javax.swing.JDialog {
         }
 
         sw.split();
-        System.out.println(sw.toSplitString());
+        Logger.info(sw.toSplitString());
         
         //pw.saveWordstoFile("chinesewordsfinded.txt");
         pw.savetoFile("splitcounterresult.txt");
         pw.saveSplitResults();
+        rc.saveFile("autospiltresult.txt");
         sw.stop();
         
-        System.out.println(sw.toString());
+        Logger.info("Split completete. Time cost: " + sw.toString());
     }
 
     void initSentences(Poem poem) {
