@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
+import poemstar.beans.PoemWords;
 
 /**
  *
@@ -46,5 +47,27 @@ public class RepeatCalculator {
         }
     }
 
+    public void saveFile(String filename, PoemWords pw) {
+        ArrayList<String> lines = new ArrayList<>();
+
+        for (String w : word2Count.keySet()) {
+            Integer count = word2Count.get(w);
+
+            if ((count > 1) && !pw.findWord(w)) {
+                // Not found in the word collection
+                String line = w + ":" + count.toString();
+
+                lines.add(line);
+            }
+        }
+
+        try {
+            File resultfile = new File(filename);
+            FileUtils.writeLines(resultfile, lines);
+        } catch (IOException ex) {
+            Logger.warn(ex);
+        }
+    }
+    
     HashMap<String, Integer> word2Count = new HashMap<>();
 }

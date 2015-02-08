@@ -287,7 +287,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
         SecureRandom random = new SecureRandom();
         ArrayList<Integer> parsed = new ArrayList<>();
         int i = 0;
-        while (i < 5000) {
+        while (i < 8000) {
             int pos = random.nextInt(val.getCount());
             
             if (parsed.contains(pos)) {
@@ -316,7 +316,7 @@ public class SplitWordDialog extends javax.swing.JDialog {
         //pw.saveWordstoFile("chinesewordsfinded.txt");
         pw.savetoFile("splitcounterresult.txt");
         pw.saveSplitResults();
-        rc.saveFile("autospiltresult.txt");
+        rc.saveFile("autospiltresult.txt", pw);
         sw.stop();
         
         Logger.info("Split completete. Time cost: " + sw.toString());

@@ -47,7 +47,12 @@ public class PoemWords {
         }
     }
 
-    private boolean findWord(String s) {
+    /**
+     * Find a word in the collection
+     * @param s word to find
+     * @return true if founded
+     */
+    public boolean findWord(String s) {
         return matcher_.findWord(s);
     }
 
