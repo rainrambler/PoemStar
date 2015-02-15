@@ -47,6 +47,40 @@ public class PoemWords {
         }
     }
 
+    private void addMatchedWord(String verse, String wordStr) {
+        if (wordStr.isEmpty()) {
+            Logger.warn("PoenWords.addMatchedWord2: parameter is empty!");
+            return;
+        }
+        
+        addWordtoVerse(verse, wordStr);
+        
+        if (matchedWords.containsKey(wordStr)) {
+            Integer count = matchedWords.get(wordStr);
+            count++;
+            matchedWords.put(wordStr, count);
+        }
+        else {
+            matchedWords.put(wordStr, 1);
+        }
+    }
+    
+    private void addWordtoVerse(String verse, String wordStr) {
+        if (wordStr.isEmpty() || verse.isEmpty()) {
+            Logger.warn("PoenWords.addWordtoVerse: parameter is empty!");
+            return;
+        }
+        
+        if (matchedVerses.containsKey(wordStr)) {
+            Verses v = matchedVerses.get(wordStr);
+            v.addVerse(verse);
+        }
+        else {
+            Verses v = new Verses();
+            matchedVerses.put(wordStr, v);
+        }
+    }
+    
     /**
      * Find a word in the collection
      * @param s word to find
@@ -56,66 +90,6 @@ public class PoemWords {
         return matcher_.findWord(s);
     }
 
-    /**
-     * Parse a sentence of a poem
-     * @param s a sentence of a poem
-     * @return Parse success or failed
-     */
-    public boolean parseSentence(String s) {
-        if ((s == null) || (s.isEmpty())) {
-            Logger.warn("PoenWords.parseSentence: parameter is empty!");
-            return false;
-        }
-        
-        parseResult = "";
-        
-        int curPos = 0;
-        int curLength = 2;
-        while ((curPos + curLength) <= s.length()) {
-            String partString = s.substring(curPos, curPos + curLength);
-            boolean isMatched = false;
-            while (findWord(partString)) {
-                isMatched = true;
-                addMatchedWord(partString); // save matched word
-                
-                parseResult += partString + "-";
-
-                curLength++;
-                if ((curPos + curLength) > s.length()) {
-                    // matched and reached the end
-                    logParsedSentence();
-                    return true;
-                }
-                partString = s.substring(curPos, curPos + curLength);
-            }
-
-            if (isMatched) {
-                curPos += curLength - 1; // Revert one char                                
-            }
-            else {
-                curPos++;
-                if (curPos >= s.length() - 1) {
-                    for (int i = 0; i < partString.length(); i++) {
-                        parseResult += partString.charAt(i) + "-";
-                    }
-                    curPos++; // avoid append the last char twice
-                }
-                else {
-                    parseResult += partString.charAt(0) + "-";
-                }
-            }
-            
-            curLength = 2;
-        }
-        
-        if (curPos == (s.length() - 1)) {
-            parseResult += s.substring(s.length() - 1) + "-"; // The last char
-        }
-
-        logParsedSentence();        
-        return true;
-    }
-    
     /**
      * Parse a sentence of a poem
      * @param s a sentence of a poem
@@ -134,7 +108,7 @@ public class PoemWords {
             parseResult += oneWord + "-";
             
             if (oneWord.length() >  1) {
-                addMatchedWord(oneWord);
+                addMatchedWord(s, oneWord);
             }
         }
         
@@ -213,6 +187,34 @@ public class PoemWords {
         }
     }
     
+    /**
+     * Save word to verses to file
+     * @param filename File name to save
+     */
+    public void saveVersestoFile(String filename) {
+        if (matchedVerses.isEmpty()) {
+            return;
+        }
+
+        try {
+            ArrayList<String> lines = new ArrayList<>();
+            File f = new File(filename);
+            for (String key : matchedVerses.keySet()) {
+                lines.add("---------------------");
+                lines.add(key + ":");
+                
+                Verses v = matchedVerses.get(key);
+                int count = v.getCount();
+                for (int i = 0; i < count; i++) {
+                    lines.add(v.getAt(i));
+                }
+            }
+            FileUtils.writeLines(f, lines);
+        } catch (IOException ex) {
+            Logger.error(ex);
+        }
+    }
+    
     public void saveSplitResults() {
         writer_.writeLogFiles();
     }
@@ -225,7 +227,8 @@ public class PoemWords {
         return matchedWords.size();
     }
     
-    //HashSet<String> allWords = new HashSet<>();
+    HashMap<String, Verses> matchedVerses = new HashMap<>();
+    
     HashMap<String, Integer> matchedWords = new HashMap<>();
     String parseResult = "";
     

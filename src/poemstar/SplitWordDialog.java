@@ -312,9 +312,9 @@ public class SplitWordDialog extends javax.swing.JDialog {
 
         sw.split();
         Logger.info(sw.toSplitString());
-        
-        //pw.saveWordstoFile("chinesewordsfinded.txt");
+                
         pw.savetoFile("splitcounterresult.txt");
+        pw.saveVersestoFile("word2verses.txt");
         pw.saveSplitResults();
         rc.saveFile("autospiltresult.txt", pw);
         sw.stop();
