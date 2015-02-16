@@ -77,6 +77,7 @@ public class PoemWords {
         }
         else {
             Verses v = new Verses();
+            v.addVerse(verse);
             matchedVerses.put(wordStr, v);
         }
     }
@@ -199,12 +200,17 @@ public class PoemWords {
         try {
             ArrayList<String> lines = new ArrayList<>();
             File f = new File(filename);
-            for (String key : matchedVerses.keySet()) {
+            for (String key : matchedVerses.keySet()) {                              
+                Verses v = matchedVerses.get(key);
+                int count = v.getCount();
+                
+                if (count < 5) {
+                    //continue;
+                }
+                
                 lines.add("---------------------");
                 lines.add(key + ":");
                 
-                Verses v = matchedVerses.get(key);
-                int count = v.getCount();
                 for (int i = 0; i < count; i++) {
                     lines.add(v.getAt(i));
                 }
