@@ -266,12 +266,6 @@ public class SplitWordDialog extends javax.swing.JDialog {
         //ChineseWords.INSTANCE.addWord(curSentence_.getCurrentWord());
     }
 
-    public void setAllPoems(Poems val) {
-        Poem curPoem = val.getRandom(); // Random one
-
-        initSentences(curPoem);
-    }
-
     public void parseAllPoems(Poems val) {
         StopWatch sw = new StopWatch();
         sw.start();
