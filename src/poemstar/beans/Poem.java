@@ -91,12 +91,29 @@ public class Poem {
         return Title_;
     }
     
+    private boolean findKeywordsInSentence(String keyword, SearchResults results) {
+        if (keyword.contains(";")) {
+            String[] arr = keyword.split(";");
+            boolean totalresult = false;
+            for (String fragment : arr) {
+                boolean res = findInSentence(fragment, results);
+                if (res) {
+                    totalresult = true;
+                }
+            }
+            return totalresult;
+        }
+        else {
+            return findInSentence(keyword, results);
+        }
+    }
+    
     private boolean findInSentence(String fragment, SearchResults results) {
         boolean founded = false;
         final int totalCount = subSentences_.size();
         for (int i = 0; i < totalCount; i++) {
             String s = subSentences_.get(i);
-            if (s.indexOf(fragment) != -1) {
+            if (s.contains(fragment)) {
                 
                 SearchResult sr = new SearchResult();
                 sr.setAuthorName(author_.getAuthorName());
@@ -117,11 +134,8 @@ public class Poem {
                     sr.setPrevSentence(subSentences_.get(i - 1));
                 }
                 
-                //sr.setPoem(this);
-                sr.setAllSentences(getAllSentences());
-                
-                results.addResult(sr);
-                
+                sr.setAllSentences(getAllSentences());                
+                results.addResult(sr);                
                 founded = true;
             }
         }
@@ -129,6 +143,13 @@ public class Poem {
         return founded;
     }
     
+    /**
+     * Match each verse of a poem to query condition, 
+     * if successed, add to search results.
+     * @param qc Query condition
+     * @param results Output parameter
+     * @return has matched? 
+     */
     public boolean match(QueryCondition qc, SearchResults results) {
         if (!StringUtil.isNullOrEmpty(qc.getAuthor())) {
             if (!qc.getAuthor().equals(author_.getAuthorName())) {
@@ -146,7 +167,7 @@ public class Poem {
             return false;
         }
         
-        return findInSentence(qc.getKeyword(), results);
+        return findKeywordsInSentence(qc.getKeyword(), results);
     }
     
     public String getAllSentences() {

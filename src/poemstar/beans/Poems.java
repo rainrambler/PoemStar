@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- *
+ * All poems
  * @author Xinway
  */
 public class Poems {

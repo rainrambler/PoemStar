@@ -224,7 +224,7 @@ public class MainJDialog extends javax.swing.JDialog {
     ISearchResults results_;
     
     private void jButtonQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQueryActionPerformed
-        QueryCondition qc = createQueryCondition();
+        QueryCondition qc = createQueryCondition(jTextFieldKeyword.getText());
         
         Poems pms = PoemsDBManager.INSTANCE.getPoems();
         results_ = pms.findPoems(qc);
@@ -282,13 +282,13 @@ public class MainJDialog extends javax.swing.JDialog {
         dlg.setVisible(true);
     }//GEN-LAST:event_jButtonModifyActionPerformed
     
-    private QueryCondition createQueryCondition() {
+    private QueryCondition createQueryCondition(String keyword) {
         QueryCondition qc = new QueryCondition();
         
         //qc.setAuthor(jComboBoxAuthor.getSelectedItem().toString()); // TODO
         qc.setAuthor("");
         qc.setDynasty(null); // TODO
-        qc.setKeyword(jTextFieldKeyword.getText());
+        qc.setKeyword(keyword);
         return qc;
     }
     
