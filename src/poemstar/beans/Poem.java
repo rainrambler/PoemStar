@@ -135,7 +135,7 @@ public class Poem {
                 }
                 
                 sr.setAllSentences(getAllSentences());                
-                results.addResult(sr);                
+                results.addResult(fragment, sr);                
                 founded = true;
             }
         }
@@ -215,11 +215,7 @@ public class Poem {
             return false;
         }
         
-        if (StringUtil.isNullOrEmpty(Title_)) {
-            return false;
-        }
-        
-        return true;
+        return !StringUtil.isNullOrEmpty(Title_);
     }
 
     private void parseSentence() {

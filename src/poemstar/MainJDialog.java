@@ -1,5 +1,6 @@
 package poemstar;
 
+import java.util.Collection;
 import javax.swing.DefaultListModel;
 import org.pmw.tinylog.Logger;
 import poemstar.beans.ISearchResults;
@@ -231,11 +232,27 @@ public class MainJDialog extends javax.swing.JDialog {
         
         DefaultListModel resultList = new DefaultListModel();
         jListResult.setModel(resultList);
-        for (SearchResult sr : results_.getAllResults()) {
-            resultList.addElement(sr.getDescription());
+        
+        int curPos = 0; // for the relationship between UI list position and the poem
+        
+        for (String keyword : results_.getKeywords()) {            
+            Collection<SearchResult> srs = results_.getResults(keyword);
+            resultList.addElement(keyword + " founded: " + srs.size());
+            curPos++;
         }
         
-        jLabelStatus.setText("Find " + qc.getKeyword() + " total found: " + results_.size());
+        for (String keyword : results_.getKeywords()) {
+            resultList.addElement("--------------------");
+            curPos++;
+            Collection<SearchResult> srs = results_.getResults(keyword);
+            for (SearchResult sr : srs) {
+                resultList.addElement(sr.getDescription());                
+                results_.addIndextoResult(curPos, sr);
+                curPos++;
+            }
+        }
+        
+        // TODO: Save UI result to a txt file
     }//GEN-LAST:event_jButtonQueryActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -253,11 +270,13 @@ public class MainJDialog extends javax.swing.JDialog {
             jTextAreaContent.setText("");
         }
         else {
-            SearchResult sr = results_.getAt(curIndex);
+            SearchResult sr = results_.FindResult(curIndex);
             
-            String result = sr.getDesc() + "\r\n";
-            result += sr.getAllSentences();
-            jTextAreaContent.setText(result);
+            if (sr != null) {
+                String result = sr.getDesc() + "\r\n";
+                result += sr.getAllSentences();
+                jTextAreaContent.setText(result);
+            }            
         }
     }//GEN-LAST:event_jListResultMouseClicked
 

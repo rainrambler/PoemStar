@@ -71,6 +71,10 @@ public class SearchResult {
         this.nextSentence = nextSentence;
     }
     
+    /**
+     * Include the previous verse and the next verse
+     * @return Verses
+     */
     public String getDescription() {
         String s = "";
         if (prevSentence.length() != 0) {

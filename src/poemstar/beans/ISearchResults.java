@@ -9,20 +9,14 @@ import java.util.Collection;
 public interface ISearchResults {
     /**
      * All search results
+     * @param key keyword
      * @return search results
      */
-    Collection<SearchResult> getAllResults();
+    Collection<SearchResult> getResults(String key);
     
-    /**
-     * Results size
-     * @return Results size
-     */
-    int size();
+    Collection<String> getKeywords();
     
-    /**
-     * Get the search result in specified index
-     * @param idx the array index
-     * @return if index is out of range, return null, otherwise the search result.
-     */
-    SearchResult getAt(int idx);
+    void addIndextoResult(int idx, SearchResult sr);
+    
+    SearchResult FindResult(int idx);
 }
