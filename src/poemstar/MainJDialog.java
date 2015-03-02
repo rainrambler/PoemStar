@@ -1,7 +1,15 @@
 package poemstar;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.ListModel;
+import javax.swing.filechooser.FileFilter;
+import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 import poemstar.beans.ISearchResults;
 import poemstar.beans.Poems;
@@ -12,6 +20,7 @@ import poemstar.util.DateTimeUtils;
 
 /**
  * Main UI
+ *
  * @author Xinway
  */
 public class MainJDialog extends javax.swing.JDialog {
@@ -55,6 +64,7 @@ public class MainJDialog extends javax.swing.JDialog {
         jTextAreaContent = new javax.swing.JTextArea();
         jButtonSplitWord = new javax.swing.JButton();
         jButtonModify = new javax.swing.JButton();
+        jButtonExport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PoemStar");
@@ -135,6 +145,13 @@ public class MainJDialog extends javax.swing.JDialog {
             }
         });
 
+        jButtonExport.setText("导出");
+        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +194,9 @@ public class MainJDialog extends javax.swing.JDialog {
                                         .addComponent(jComboBoxAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButtonClearAuthor)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonExport)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                         .addComponent(jButtonModify)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSplitWord)))
@@ -207,7 +226,8 @@ public class MainJDialog extends javax.swing.JDialog {
                     .addComponent(jTextFieldKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonQuery)
                     .addComponent(jButtonSplitWord)
-                    .addComponent(jButtonModify))
+                    .addComponent(jButtonModify)
+                    .addComponent(jButtonExport))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPaneLog, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -223,35 +243,36 @@ public class MainJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     ISearchResults results_;
-    
+
     private void jButtonQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQueryActionPerformed
         QueryCondition qc = createQueryCondition(jTextFieldKeyword.getText());
-        
+
         Poems pms = PoemsDBManager.INSTANCE.getPoems();
         results_ = pms.findPoems(qc);
-        
+
         DefaultListModel resultList = new DefaultListModel();
         jListResult.setModel(resultList);
-        
+        //jListResult
+
         int curPos = 0; // for the relationship between UI list position and the poem
-        
-        for (String keyword : results_.getKeywords()) {            
+
+        for (String keyword : results_.getKeywords()) {
             Collection<SearchResult> srs = results_.getResults(keyword);
             resultList.addElement(keyword + " founded: " + srs.size());
             curPos++;
         }
-        
+
         for (String keyword : results_.getKeywords()) {
             resultList.addElement("--------------------");
             curPos++;
             Collection<SearchResult> srs = results_.getResults(keyword);
             for (SearchResult sr : srs) {
-                resultList.addElement(sr.getDescription());                
+                resultList.addElement(sr.getDescription());
                 results_.addIndextoResult(curPos, sr);
                 curPos++;
             }
         }
-        
+
         // TODO: Save UI result to a txt file
     }//GEN-LAST:event_jButtonQueryActionPerformed
 
@@ -265,24 +286,23 @@ public class MainJDialog extends javax.swing.JDialog {
 
     private void jListResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListResultMouseClicked
         final int curIndex = jListResult.getSelectedIndex();
-        
+
         if (curIndex == -1) {
             jTextAreaContent.setText("");
-        }
-        else {
+        } else {
             SearchResult sr = results_.FindResult(curIndex);
-            
+
             if (sr != null) {
                 String result = sr.getDesc() + "\r\n";
                 result += sr.getAllSentences();
                 jTextAreaContent.setText(result);
-            }            
+            }
         }
     }//GEN-LAST:event_jListResultMouseClicked
 
     private void jButtonSplitWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSplitWordActionPerformed
         SplitWordDialog dlg = new SplitWordDialog(null, true);
-        
+
         dlg.parseAllPoems(PoemsDBManager.INSTANCE.getPoems());
         dlg.setVisible(true);
     }//GEN-LAST:event_jButtonSplitWordActionPerformed
@@ -293,27 +313,73 @@ public class MainJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void jButtonClearAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearAuthorActionPerformed
-        
+
     }//GEN-LAST:event_jButtonClearAuthorActionPerformed
 
     private void jButtonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyActionPerformed
         ModifyPoemJDialog dlg = new ModifyPoemJDialog(null, true);
         dlg.setVisible(true);
     }//GEN-LAST:event_jButtonModifyActionPerformed
-    
+
+    private void jButtonExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportActionPerformed
+
+        fc.addChoosableFileFilter(new FileFilter() {
+
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                return f.getName().endsWith(".txt");
+            }
+
+            @Override
+            public String getDescription() {
+                return "*.txt";
+            }
+
+        });
+
+        int returnVal = fc.showSaveDialog(this);
+
+        if (returnVal != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        File f = fc.getSelectedFile();
+
+            //jListResult
+        //FileUtils.writeLines(f, allSentences_);
+        ArrayList<String> allSentences = new ArrayList<>();
+
+        ListModel listModel = jListResult.getModel();
+        for (int i = 0; i < listModel.getSize(); i++) {
+            allSentences.add(listModel.getElementAt(i).toString());
+        }
+
+        try {
+            FileUtils.writeLines(f, allSentences);
+        } catch (IOException ex) {
+            Logger.error(ex);
+        }
+    }//GEN-LAST:event_jButtonExportActionPerformed
+
+    //Create a file chooser
+    final JFileChooser fc = new JFileChooser();
+
     private QueryCondition createQueryCondition(String keyword) {
         QueryCondition qc = new QueryCondition();
-        
+
         //qc.setAuthor(jComboBoxAuthor.getSelectedItem().toString()); // TODO
         qc.setAuthor("");
         qc.setDynasty(null); // TODO
         qc.setKeyword(keyword);
         return qc;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupDynasty;
     private javax.swing.JButton jButtonClearAuthor;
+    private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonModify;
     private javax.swing.JButton jButtonQuery;
     private javax.swing.JButton jButtonSplitWord;

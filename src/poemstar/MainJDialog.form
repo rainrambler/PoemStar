@@ -78,7 +78,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="242" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonExport" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="179" max="32767" attributes="0"/>
                       <Component id="jButtonModify" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonSplitWord" min="-2" max="-2" attributes="0"/>
@@ -115,6 +117,7 @@
                   <Component id="jButtonQuery" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSplitWord" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonExport" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPaneLog" min="-2" pref="114" max="-2" attributes="0"/>
@@ -280,6 +283,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonModifyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonExport">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x5bfc;&#x51fa;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
