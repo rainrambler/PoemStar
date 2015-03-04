@@ -3,9 +3,12 @@ package poemstar.algorithm;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
+import poemstar.beans.ChineseWords;
 import poemstar.beans.PoemWords;
 
 /**
@@ -53,16 +56,43 @@ public class RepeatCalculator {
      * @param pw 
      */
     public void saveFile(String filename, PoemWords pw) {
-        ArrayList<String> lines = new ArrayList<>();
-
+        HashSet<Integer> repeatTimes = new HashSet<>();
+        HashMap<Integer, ChineseWords> times2Words = new HashMap<>();
+        
         for (String w : word2Count.keySet()) {
-            Integer count = word2Count.get(w);
+            Integer count = word2Count.get(w);                       
 
             if ((count > 1) && !pw.findWord(w)) {
                 // Not found in the word collection
-                String line = w + ":" + count.toString();
-
-                lines.add(line);
+                if (!repeatTimes.contains(count)) {
+                    repeatTimes.add(count);
+                }
+                if (times2Words.containsKey(count)) {
+                    times2Words.get(count).add(w);
+                }
+                else {
+                    ChineseWords cw = new ChineseWords();
+                    cw.add(w);
+                    times2Words.put(count, cw);
+                }
+            }
+        }
+        
+        
+        ArrayList<Integer> sortedTimes = new ArrayList<>(repeatTimes);
+        Collections.sort(sortedTimes);
+        Collections.reverse(sortedTimes);
+        
+        ArrayList<String> lines = new ArrayList<>();
+        for (Integer times : sortedTimes) {
+            ChineseWords cw = times2Words.get(times);
+            
+            if (cw != null) {
+                Integer wordscount = cw.getSize();
+                for (int i = 0; i < wordscount; i++) {
+                    String line = cw.getAt(i) + ":" + times.toString();
+                    lines.add(line);
+                }
             }
         }
 
