@@ -31,22 +31,6 @@ public class PoemWords {
         matcher_.finishAddWord();
     }
 
-    private void addMatchedWord(String wordStr) {
-        if (wordStr.isEmpty()) {
-            Logger.warn("PoenWords.addMatchedWord: parameter is empty!");
-            return;
-        }
-        
-        if (matchedWords.containsKey(wordStr)) {
-            Integer count = matchedWords.get(wordStr);
-            count++;
-            matchedWords.put(wordStr, count);
-        }
-        else {
-            matchedWords.put(wordStr, 1);
-        }
-    }
-
     private void addMatchedWord(String verse, String wordStr) {
         if (wordStr.isEmpty()) {
             Logger.warn("PoenWords.addMatchedWord2: parameter is empty!");

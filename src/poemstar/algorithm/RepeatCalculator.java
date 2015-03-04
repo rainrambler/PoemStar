@@ -47,6 +47,11 @@ public class RepeatCalculator {
         }
     }
 
+    /**
+     * Save the automatic splitted words
+     * @param filename
+     * @param pw 
+     */
     public void saveFile(String filename, PoemWords pw) {
         ArrayList<String> lines = new ArrayList<>();
 

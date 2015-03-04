@@ -18,7 +18,7 @@ public class Author {
     }
 
     /**
-     * @param AuthorId_ the AuthorId_ to set
+     * @param AuthorId
      */
     public void setAuthorId(int AuthorId) {
         this.AuthorId_ = AuthorId;
