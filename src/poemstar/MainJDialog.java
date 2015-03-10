@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.ListModel;
