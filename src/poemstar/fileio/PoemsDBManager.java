@@ -29,10 +29,6 @@ public enum PoemsDBManager {
         return poemDB_.getPoems();
     }
     
-    public Poem findPoem(PoemIndex pi) {
-        return poemDB_.findPoem(pi);
-    }
-    
     public Poem findPoem(String dynasty, String author, String title) {
         PoemIndex pi = new PoemIndex();
         pi.setAuthor(author);

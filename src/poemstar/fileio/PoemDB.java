@@ -76,6 +76,11 @@ public final class PoemDB {
         return poems_.findPoems(qc);
     }
 
+    /**
+     * Find a poem by its author, dynasty, title EXACTLY
+     * @param pi keywords
+     * @return Founded poem or null
+     */
     public Poem findPoem(PoemIndex pi) {
         if (!poemIndexToPoemMap_.containsKey(pi)) {
             return null;
