@@ -41,6 +41,14 @@ public enum PoemsDBManager {
         return poemDB_.findPoem(pi);
     }
     
+    public boolean deletePoem(String dynasty, String author, String title) {
+        PoemIndex pi = new PoemIndex();
+        pi.setAuthor(author);
+        pi.setDynasty(dynasty);
+        pi.setTitle(title);
+        return poemDB_.deletePoem(pi);
+    }
+    
     public boolean modifyPoemContent(Poem p) {        
         if (!p.isValid()) {
             return false;

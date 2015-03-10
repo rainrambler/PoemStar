@@ -40,6 +40,7 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
         jTextAreaContent = new javax.swing.JTextArea();
         jLabelLog = new javax.swing.JLabel();
         jButtonAddPoem = new javax.swing.JButton();
+        jButtonDelPoem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,6 +75,13 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
             }
         });
 
+        jButtonDelPoem.setText("删除");
+        jButtonDelPoem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDelPoemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +109,8 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonModify, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAddPoem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonAddPoem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonDelPoem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,7 +132,9 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonModify)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAddPoem))
+                        .addComponent(jButtonAddPoem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonDelPoem))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelLog)
@@ -174,8 +185,22 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
         jLabelLog.setText(res);
     }//GEN-LAST:event_jButtonAddPoemActionPerformed
 
+    private void jButtonDelPoemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelPoemActionPerformed
+        String dynasty = jTextFieldDynasty.getText();
+        String author = jTextFieldAuthor.getText();
+        String title = jTextFieldTitle.getText();
+        boolean res = PoemsDBManager.INSTANCE.deletePoem(dynasty, author, title);
+        if (res) {
+            jLabelLog.setText("Delete complete.");
+        }
+        else {
+            jLabelLog.setText("Cannot find. Nothing to delete.");
+        }
+    }//GEN-LAST:event_jButtonDelPoemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddPoem;
+    private javax.swing.JButton jButtonDelPoem;
     private javax.swing.JButton jButtonModify;
     private javax.swing.JButton jButtonQuery;
     private javax.swing.JLabel jLabelAuthor;

@@ -94,6 +94,15 @@ public final class PoemDB {
         return p;
     }
     
+    public boolean deletePoem(PoemIndex pi) {
+        if (!poemIndexToPoemMap_.containsKey(pi)) {
+            return false; // nothing to delete
+        }
+
+        poemIndexToPoemMap_.remove(pi);
+        return true;
+    }
+    
     public boolean modifyPoemContent(Poem p) {
         PoemIndex pi = p.toPoemIndex();
         

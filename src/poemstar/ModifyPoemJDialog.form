@@ -50,6 +50,7 @@
                           <Component id="jButtonQuery" min="-2" pref="79" max="-2" attributes="0"/>
                           <Component id="jButtonModify" min="-2" pref="79" max="-2" attributes="0"/>
                           <Component id="jButtonAddPoem" min="-2" pref="79" max="-2" attributes="0"/>
+                          <Component id="jButtonDelPoem" min="-2" pref="79" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -79,6 +80,8 @@
                       <Component id="jButtonModify" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonAddPoem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButtonDelPoem" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="346" max="-2" attributes="0"/>
               </Group>
@@ -150,6 +153,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddPoemActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonDelPoem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x5220;&#x9664;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDelPoemActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
