@@ -18,7 +18,7 @@ import poemstar.beans.QueryCondition;
  */
 public final class PoemDB {
 
-    public void save() {
+    private void save() {
         mapdb_.commit();        
     }
     
@@ -40,14 +40,20 @@ public final class PoemDB {
         constructPoems();
     }
 
-    public void addPoem(Poem p) {
+    /**
+     * Add a poem to mapdb database
+     * @param p Poem
+     * @return Result
+     */
+    public String addPoem(Poem p) {
         PoemIndex idx = p.toPoemIndex();
 
-        addPoem(idx, p.getContent());
-    }
-
-    private void addPoem(PoemIndex pi, String content) {
-        poemIndexToPoemMap_.put(pi, content);
+        if (poemIndexToPoemMap_.containsKey(idx)) {
+            return "Poem already exists:" + idx.getAuthor() + "(" + idx.getDynasty() + "):" + idx.getTitle();
+        }
+        poemIndexToPoemMap_.put(idx, p.getContent());
+        save();
+        return "Added complete";
     }
 
     public void constructPoems() {
@@ -96,6 +102,7 @@ public final class PoemDB {
         }
         
         poemIndexToPoemMap_.put(pi, p.getContent());
+        save();
         return true;
     }
     

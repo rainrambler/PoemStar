@@ -11,6 +11,8 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form ModifyPoemJDialog
+     * @param parent
+     * @param modal
      */
     public ModifyPoemJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -168,8 +170,8 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
         String title = jTextFieldTitle.getText();
         String content = jTextAreaContent.getText();
         
-        PoemsDBManager.INSTANCE.addPoemContent(dynasty, author, title, content);
-        //PoemsDBManager.INSTANCE.save();
+        String res = PoemsDBManager.INSTANCE.addPoemContent(dynasty, author, title, content);
+        jLabelLog.setText(res);
     }//GEN-LAST:event_jButtonAddPoemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

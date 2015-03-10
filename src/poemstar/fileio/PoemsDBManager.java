@@ -20,11 +20,7 @@ public enum PoemsDBManager {
             dbLoaded_ = true;
         }
     }
-    
-    public void save() {
-        poemDB_.save();        
-    }
-    
+        
     public void close() {
         poemDB_.close();
     }
@@ -67,23 +63,22 @@ public enum PoemsDBManager {
         p.setContent(content);
         p.setoriginalId("NA");              
         
-        if (!modifyPoemContent(p)) {
-            return false;
-        }
+        return modifyPoemContent(p);
+    }
         
-        save(); // commit
-        return true;
-    }
-    
-    public void addPoem(Poem p) {
-        poemDB_.addPoem(p);        
-    }
-    
-    public void addPoemContent(String dynasty, String authorName, String title, String content) {
+    /**
+     * Add a poem to database
+     * @param dynasty
+     * @param authorName
+     * @param title
+     * @param content 
+     * @return Result
+     */
+    public String addPoemContent(String dynasty, String authorName, String title, String content) {
         if (StringUtil.isNullOrEmpty(title) || StringUtil.isNullOrEmpty(dynasty)
                 || StringUtil.isNullOrEmpty(authorName)
                 || StringUtil.isNullOrEmpty(content)) {
-            return ;
+            return "Parameter is null or empty. Add poem failure!";
         }
         
         Poem p = new Poem();
@@ -95,8 +90,7 @@ public enum PoemsDBManager {
         p.setContent(content);
         p.setoriginalId("NA");              
         
-        addPoem(p);
-        save();
+        return poemDB_.addPoem(p);        
     }
         
     PoemDB poemDB_ = new PoemDB();

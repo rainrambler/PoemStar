@@ -61,13 +61,4 @@ public final class PoemIndex implements Comparable<PoemIndex>, Serializable {
                 .compare(o.Dynasty, Dynasty)
                 .result();
     }
-    
-    /**
-     * Compare two authors (Only by Name)
-     * @param pi Poem Index
-     * @return The same author or no
-     */
-    public boolean matchAuthor(PoemIndex pi) {
-        return this.Author.equals(pi.Author);
-    }
 }

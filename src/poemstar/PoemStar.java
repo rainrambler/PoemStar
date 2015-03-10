@@ -1,11 +1,8 @@
 package poemstar;
 
-import java.io.IOException;
 import org.pmw.tinylog.Configurator;
 import org.pmw.tinylog.Level;
-import org.pmw.tinylog.Logger;
 import org.pmw.tinylog.writers.FileWriter;
-import org.pmw.tinylog.writers.Writer;
 
 /**
  *
