@@ -281,7 +281,7 @@ public class MainJDialog extends javax.swing.JDialog {
         //ChineseWords.INSTANCE.loadFromFile("D:\\chinesewords.txt");
         Logger.info("{}: PoemStart started.", DateTimeUtils.getTimeDesc());
         PoemsDBManager.INSTANCE.init();
-        jLabelStatus.setText("Read from DB complete!");
+        jLabelStatus.setText("Read from DB complete! Count: " + PoemsDBManager.INSTANCE.getPoems().getCount());
         Logger.info("{}: Read from DB complete!", DateTimeUtils.getTimeDesc());
     }//GEN-LAST:event_formWindowOpened
 
