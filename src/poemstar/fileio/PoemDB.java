@@ -40,6 +40,30 @@ public final class PoemDB {
         constructPoems();
     }
 
+    public void loadconvert() {
+        // configure and open database using builder pattern.
+        // all options are available with code auto-completion.
+        mapdb_ = DBMaker.newFileDB(new File("AllPoems.db"))
+                .closeOnJvmShutdown()
+                .encryptionEnable("password")
+                .make();
+        
+        // open an existing collection (or create new)
+        poemIndexToPoemMap_ = mapdb_.getTreeMap("Poems");
+        
+        PoemLevelDB leveldb = new PoemLevelDB();
+        leveldb.openDatabase();
+        
+        for (PoemIndex pi : poemIndexToPoemMap_.keySet()) {
+            String content = poemIndexToPoemMap_.get(pi);
+            leveldb.addPoem(pi, content);
+        }
+        
+        leveldb.close();
+
+        constructPoems();
+    }
+    
     /**
      * Add a poem to mapdb database
      * @param p Poem
@@ -105,6 +129,7 @@ public final class PoemDB {
         }
 
         poemIndexToPoemMap_.remove(pi);
+        save();
         return true;
     }
     
@@ -120,7 +145,7 @@ public final class PoemDB {
         return true;
     }
     
-    DB mapdb_;
+    DB mapdb_;       
     ConcurrentNavigableMap<PoemIndex, String> poemIndexToPoemMap_;
 
     public Poems getPoems() {

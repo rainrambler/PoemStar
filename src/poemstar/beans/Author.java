@@ -32,7 +32,7 @@ public class Author {
     }
 
     /**
-     * @param AuthorName_ the AuthorName_ to set
+     * @param AuthorName
      */
     public void setAuthorName(String AuthorName) {
         this.AuthorName_ = AuthorName;
@@ -46,7 +46,7 @@ public class Author {
     }
 
     /**
-     * @param AuthorDesc_ the AuthorDesc_ to set
+     * @param AuthorDesc
      */
     public void setAuthorDesc(String AuthorDesc) {
         this.AuthorDesc_ = AuthorDesc;

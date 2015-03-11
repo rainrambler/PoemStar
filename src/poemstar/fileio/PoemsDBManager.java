@@ -8,7 +8,7 @@ import poemstar.beans.Poems;
 import poemstar.util.StringUtil;
 
 /**
- *
+ * Wrapper of poem database
  * @author xinway
  */
 public enum PoemsDBManager {
@@ -16,7 +16,7 @@ public enum PoemsDBManager {
     
     public void init() {
         if (!dbLoaded_) {
-            poemDB_.load();
+            poemDB_.loadconvert();
             dbLoaded_ = true;
         }
     }
@@ -88,16 +88,20 @@ public enum PoemsDBManager {
         Poem p = new Poem();
         Author author = new Author();
         author.setAuthorName(authorName);
+        author.setAuthorDesc("NA");
+        author.setAuthorId(100);
+        author.setDynasty(dynasty);
         p.setAuthor(author);
         p.setDynasty(dynasty);
         p.setTitle(title);
         p.setContent(content);
         p.setoriginalId("NA");              
+        p.setId(100);
+        p.setDesc("NA");
         
         return poemDB_.addPoem(p);        
     }
         
-    PoemDB poemDB_ = new PoemDB();
-    
+    PoemDB poemDB_ = new PoemDB();    
     boolean dbLoaded_ = false;
 }

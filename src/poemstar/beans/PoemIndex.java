@@ -2,6 +2,7 @@ package poemstar.beans;
 
 import com.google.common.collect.ComparisonChain;
 import java.io.Serializable;
+import poemstar.util.StringUtil;
 
 /**
  * Lookup index (Author name, Dynasty, Title)
@@ -52,6 +53,15 @@ public final class PoemIndex implements Comparable<PoemIndex>, Serializable {
      */
     public void setTitle(String Title) {
         this.Title = Title;
+    }
+    
+    public String toDescription() {
+        return Dynasty + "|" + Author + "|" + Title;
+    }
+    
+    public boolean isValid() {
+        return !StringUtil.isNullOrEmpty(Title) && !StringUtil.isNullOrEmpty(Author)
+                && !StringUtil.isNullOrEmpty(Dynasty);
     }
 
     @Override
