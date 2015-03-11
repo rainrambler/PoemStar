@@ -4,15 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/Test/Poem/PoemStar/src/poemstar/MainJDialog.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/PoemWords.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/util/StringUtil.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/algorithm/RepeatCalculator.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/fileio/SplitResultWriter.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/SplitWordDialog.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/util/DateTimeUtils.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/algorithm/WordMatcher.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/Poems.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/PoemIndex.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/fileio/PoemDB.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/fileio/PoemsDBManager.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/Poem.java</file>
+            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/ModifyPoemJDialog.java</file>
             <file>file:/G:/Test/Poem/PoemStar/src/poemstar/PoemStar.java</file>
-            <file>file:/G:/Test/Poem/PoemStar/src/poemstar/beans/VerseIDs.java</file>
         </group>
     </open-files>
 </project-private>

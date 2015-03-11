@@ -16,48 +16,32 @@ public enum PoemsDBManager {
     
     public void init() {
         if (!dbLoaded_) {
-            poemDB_.loadconvert();
+            leveldb_.openDatabase();
+            allPoems_ = leveldb_.getAllPoems();
+            //PoemDB poemDB_ = new PoemDB();
+            //poemDB_.loadconvert();
             dbLoaded_ = true;
         }
     }
         
     public void close() {
-        poemDB_.close();
+        leveldb_.close();
     }
     
     public Poems getPoems() {
-        return poemDB_.getPoems();
+        return allPoems_;
     }
     
-    public Poem findPoem(String dynasty, String author, String title) {
+    public Poem findPoem(String dynasty, String authorName, String title) {        
         PoemIndex pi = new PoemIndex();
-        pi.setAuthor(author);
+        pi.setAuthor(authorName);
         pi.setDynasty(dynasty);
         pi.setTitle(title);
-        return poemDB_.findPoem(pi);
-    }
-    
-    public boolean deletePoem(String dynasty, String author, String title) {
-        PoemIndex pi = new PoemIndex();
-        pi.setAuthor(author);
-        pi.setDynasty(dynasty);
-        pi.setTitle(title);
-        return poemDB_.deletePoem(pi);
-    }
-    
-    public boolean modifyPoemContent(Poem p) {        
-        if (!p.isValid()) {
-            return false;
+        String content = leveldb_.findPoem(pi); // find in db
+        if (StringUtil.isNullOrEmpty(content)) {
+            return null;
         }
-        return poemDB_.modifyPoemContent(p);
-    }
-    
-    public boolean modifyPoemContent(String dynasty, String authorName, String title, String content) {
-        if (StringUtil.isNullOrEmpty(title) || StringUtil.isNullOrEmpty(dynasty)
-                || StringUtil.isNullOrEmpty(authorName)
-                || StringUtil.isNullOrEmpty(content)) {
-            return false;
-        }
+        
         Poem p = new Poem();
         Author author = new Author();
         author.setAuthorName(authorName);
@@ -65,9 +49,23 @@ public enum PoemsDBManager {
         p.setDynasty(dynasty);
         p.setTitle(title);
         p.setContent(content);
-        p.setoriginalId("NA");              
+        p.setoriginalId("NA");
         
-        return modifyPoemContent(p);
+        return p;
+    }
+    
+    public boolean deletePoem(String dynasty, String author, String title) {
+        PoemIndex pi = new PoemIndex();
+        pi.setAuthor(author);
+        pi.setDynasty(dynasty);
+        pi.setTitle(title);
+        leveldb_.deletePoem(pi); // delete in db
+        return true;
+    }
+    
+    public boolean modifyPoemContent(String dynasty, String authorName, String title, String content) {
+        addPoemContent(dynasty, authorName, title, content);
+        return true;
     }
         
     /**
@@ -76,7 +74,7 @@ public enum PoemsDBManager {
      * @param authorName
      * @param title
      * @param content 
-     * @return Result
+     * @return Result description for tips
      */
     public String addPoemContent(String dynasty, String authorName, String title, String content) {
         if (StringUtil.isNullOrEmpty(title) || StringUtil.isNullOrEmpty(dynasty)
@@ -99,9 +97,17 @@ public enum PoemsDBManager {
         p.setId(100);
         p.setDesc("NA");
         
-        return poemDB_.addPoem(p);        
+        PoemIndex pi = new PoemIndex();
+        pi.setAuthor(authorName);
+        pi.setDynasty(dynasty);
+        pi.setTitle(title);
+        
+        leveldb_.addPoem(pi, content);        
+        return "Add poem complete.";
     }
         
-    PoemDB poemDB_ = new PoemDB();    
+    //PoemDB poemDB_ = new PoemDB();    
+    PoemLevelDB leveldb_ = new PoemLevelDB();
+    Poems allPoems_ = new Poems();
     boolean dbLoaded_ = false;
 }
