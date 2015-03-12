@@ -53,6 +53,11 @@ public class SplitWordDialog extends javax.swing.JDialog {
         jButtonAutoDivide = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jButtonClose.setText("Close");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +124,6 @@ public class SplitWordDialog extends javax.swing.JDialog {
         jLabelStatus.setText("jLabel4");
 
         jButtonAutoDivide.setText("自动分词");
-        jButtonAutoDivide.setActionCommand("自动分词");
         jButtonAutoDivide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAutoDivideActionPerformed(evt);
@@ -255,6 +259,10 @@ public class SplitWordDialog extends javax.swing.JDialog {
         //pw.saveWordstoFile("chinesesplitresult.txt");
         pw.savetoFile("splitcounterresult.txt");
     }//GEN-LAST:event_jButtonAutoDivideActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowOpened
 
     private void syncDisplay() {
         if (curSentence_ == null) {
