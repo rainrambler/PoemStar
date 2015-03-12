@@ -31,7 +31,6 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabelDynasty = new javax.swing.JLabel();
-        jTextFieldDynasty = new javax.swing.JTextField();
         jTextFieldAuthor = new javax.swing.JTextField();
         jLabelAuthor = new javax.swing.JLabel();
         jTextFieldTitle = new javax.swing.JTextField();
@@ -90,8 +89,6 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
             }
         });
 
-        jComboBoxDynasty.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,9 +104,7 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                                 .addComponent(jLabelDynasty)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)
-                                .addComponent(jTextFieldDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(73, 73, 73)
                                 .addComponent(jLabelAuthor)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,7 +118,7 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                             .addComponent(jButtonModify, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonAddPoem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonDelPoem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +126,6 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDynasty)
-                    .addComponent(jTextFieldDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAuthor)
                     .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,7 +230,6 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaContent;
     private javax.swing.JTextField jTextFieldAuthor;
-    private javax.swing.JTextField jTextFieldDynasty;
     private javax.swing.JTextField jTextFieldTitle;
     // End of variables declaration//GEN-END:variables
 }

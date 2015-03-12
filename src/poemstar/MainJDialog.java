@@ -69,6 +69,7 @@ public class MainJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PoemStar");
+        setLocationByPlatform(true);
         setModal(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -278,6 +279,7 @@ public class MainJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonQueryActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setLocationRelativeTo(null);
         //ChineseWords.INSTANCE.loadFromFile("D:\\chinesewords.txt");
         Logger.info("{}: PoemStart started.", DateTimeUtils.getTimeDesc());
         PoemsDBManager.INSTANCE.init();
