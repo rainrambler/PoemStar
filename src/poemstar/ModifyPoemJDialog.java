@@ -1,5 +1,7 @@
 package poemstar;
 
+import java.util.List;
+import poemstar.beans.ChineseDynasty;
 import poemstar.beans.Poem;
 import poemstar.fileio.PoemsDBManager;
 
@@ -41,8 +43,14 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
         jLabelLog = new javax.swing.JLabel();
         jButtonAddPoem = new javax.swing.JButton();
         jButtonDelPoem = new javax.swing.JButton();
+        jComboBoxDynasty = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabelDynasty.setText("年代：");
 
@@ -82,6 +90,8 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
             }
         });
 
+        jComboBoxDynasty.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,8 +105,10 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabelDynasty)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
+                                .addComponent(jTextFieldDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelAuthor)
                                 .addGap(18, 18, 18)
@@ -121,7 +133,8 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
                     .addComponent(jLabelDynasty)
                     .addComponent(jTextFieldDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAuthor)
-                    .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxDynasty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitle)
@@ -144,8 +157,11 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private String getSelectedDynasty() {
+        return jComboBoxDynasty.getSelectedItem().toString();
+    }
     private void jButtonQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQueryActionPerformed
-        String dynasty = jTextFieldDynasty.getText();
+        String dynasty = getSelectedDynasty();
         String author = jTextFieldAuthor.getText();
         String title = jTextFieldTitle.getText();
         
@@ -160,7 +176,7 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonQueryActionPerformed
 
     private void jButtonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyActionPerformed
-        String dynasty = jTextFieldDynasty.getText();
+        String dynasty = getSelectedDynasty();
         String author = jTextFieldAuthor.getText();
         String title = jTextFieldTitle.getText();
         String content = jTextAreaContent.getText();
@@ -176,7 +192,7 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonModifyActionPerformed
 
     private void jButtonAddPoemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddPoemActionPerformed
-        String dynasty = jTextFieldDynasty.getText();
+        String dynasty = getSelectedDynasty();
         String author = jTextFieldAuthor.getText();
         String title = jTextFieldTitle.getText();
         String content = jTextAreaContent.getText();
@@ -186,7 +202,7 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAddPoemActionPerformed
 
     private void jButtonDelPoemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelPoemActionPerformed
-        String dynasty = jTextFieldDynasty.getText();
+        String dynasty = getSelectedDynasty();
         String author = jTextFieldAuthor.getText();
         String title = jTextFieldTitle.getText();
         boolean res = PoemsDBManager.INSTANCE.deletePoem(dynasty, author, title);
@@ -198,11 +214,21 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonDelPoemActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        List<String> alldynasty = ChineseDynasty.INSTANCE.getAll();
+        
+        jComboBoxDynasty.removeAllItems();
+        for (String s : alldynasty) {
+            jComboBoxDynasty.addItem(s);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddPoem;
     private javax.swing.JButton jButtonDelPoem;
     private javax.swing.JButton jButtonModify;
     private javax.swing.JButton jButtonQuery;
+    private javax.swing.JComboBox jComboBoxDynasty;
     private javax.swing.JLabel jLabelAuthor;
     private javax.swing.JLabel jLabelDynasty;
     private javax.swing.JLabel jLabelLog;
