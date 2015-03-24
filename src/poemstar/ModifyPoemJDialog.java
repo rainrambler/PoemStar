@@ -154,6 +154,11 @@ public class ModifyPoemJDialog extends javax.swing.JDialog {
     private String getSelectedDynasty() {
         return jComboBoxDynasty.getSelectedItem().toString();
     }
+    
+    /**
+     * Query a poem (All keywords should be matched exactly)
+     * @param evt 
+     */
     private void jButtonQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQueryActionPerformed
         String dynasty = getSelectedDynasty();
         String author = jTextFieldAuthor.getText();

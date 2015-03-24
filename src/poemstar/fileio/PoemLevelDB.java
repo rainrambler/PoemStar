@@ -70,7 +70,7 @@ public class PoemLevelDB {
             return;
         }
 
-        db_.put(bytes(pi.toDescription()), bytes(content));
+        db_.put(index2bytes(pi), bytes(content));
     }
 
     /**
@@ -79,7 +79,7 @@ public class PoemLevelDB {
      * @param pi Poem index
      */
     public void deletePoem(PoemIndex pi) {
-        db_.delete(bytes(pi.toDescription()));
+        db_.delete(index2bytes(pi));
     }
 
     /**
