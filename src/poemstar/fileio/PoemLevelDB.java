@@ -144,7 +144,7 @@ public final class PoemLevelDB {
         return allPoems;
     }
     
-    public Poem makePoem(String poemKey, String content) {
+    private Poem makePoem(String poemKey, String content) {
         PoemIndex pi = makePoemIndex(poemKey);
         if (pi == null) {
             return null;
