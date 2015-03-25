@@ -32,6 +32,13 @@ public enum PoemsDBManager {
         return allPoems_;
     }
     
+    /**
+     * Find poem by dynasty, author, title exactly
+     * @param dynasty
+     * @param authorName
+     * @param title
+     * @return 
+     */
     public Poem findPoem(String dynasty, String authorName, String title) {        
         PoemIndex pi = new PoemIndex();
         pi.setAuthor(authorName);

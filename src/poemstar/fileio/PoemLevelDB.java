@@ -14,7 +14,7 @@ import poemstar.util.StringUtil;
  *
  * @author xinway
  */
-public class PoemLevelDB {
+public final class PoemLevelDB {
 
     /**
      * Open leveldb database

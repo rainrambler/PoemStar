@@ -51,4 +51,13 @@ public class QueryCondition {
         this.Dynasty = Dynasty;
     }
     
+    public static QueryCondition createQueryCondition(String keyword) {
+        QueryCondition qc = new QueryCondition();
+
+        //qc.setAuthor(jComboBoxAuthor.getSelectedItem().toString()); // TODO
+        qc.setAuthor("");
+        qc.setDynasty(null); // TODO
+        qc.setKeyword(keyword);
+        return qc;
+    }
 }

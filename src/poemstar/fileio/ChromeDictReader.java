@@ -14,7 +14,7 @@ import poemstar.beans.PoemWords;
  * src\third_party\icu\source\data\brkitr\cc_cedict.txt
  * @author xinway
  */
-public class ChromeDictReader {
+public final class ChromeDictReader {
     /**
      * Add all words from file to poemwords
      * @param pw All Words
